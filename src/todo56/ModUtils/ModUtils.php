@@ -5,7 +5,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use todo56\ModUtils\commands\MuteCommand;
 use todo56\ModUtils\commands\RemoveskinCommand;
-
+use todo56\ModUtils\utils\PunishmentsManager;
 class ModUtils extends PluginBase{
     public $mods = [];
     public $mutes;
@@ -22,7 +22,6 @@ class ModUtils extends PluginBase{
         $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
         $this->mutes = new Config($this->getDataFolder() . "/db/mutes.yml", Config::YAML);
         $this->bans = new Config($this->getDataFolder() . "/db/bans.yml", Config::YAML);
-        var_dump($this->mutes);
         $this->getLogger()->info("Mod Utils is loading.");
         $this->getServer()->getPluginManager()->registerEvents(new ModListener($this), $this);
         foreach($this->getServer()->getOnlinePlayers() as $player){
@@ -33,6 +32,5 @@ class ModUtils extends PluginBase{
         $commandMap = $this->getServer()->getCommandMap();
         $commandMap->register("ModUtils", new MuteCommand($this));
         $commandMap->register("ModUtils", new RemoveskinCommand($this));
-
     }
 }
