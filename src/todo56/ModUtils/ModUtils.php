@@ -7,9 +7,9 @@ use todo56\ModUtils\commands\MuteCommand;
 use todo56\ModUtils\commands\RemoveskinCommand;
 use todo56\ModUtils\utils\PunishmentsManager;
 class ModUtils extends PluginBase{
-    public $mods = [];
     public $mutes;
     public $bans;
+    public $purechat = null;
     public $config;
     public function onEnable()
     {
@@ -24,13 +24,16 @@ class ModUtils extends PluginBase{
         $this->bans = new Config($this->getDataFolder() . "/db/bans.yml", Config::YAML);
         $this->getLogger()->info("Mod Utils is loading.");
         $this->getServer()->getPluginManager()->registerEvents(new ModListener($this), $this);
-        foreach($this->getServer()->getOnlinePlayers() as $player){
-            if($player->hasPermission("mod")){
-                $this->mods[] = $player->getName();
-            }
-        }
         $commandMap = $this->getServer()->getCommandMap();
         $commandMap->register("ModUtils", new MuteCommand($this));
         $commandMap->register("ModUtils", new RemoveskinCommand($this));
+        if($this->config->get("purechat-support") === true){
+            if($this->getServer()->getPluginManager()->getPlugin("PureChat")){
+                $this->purechat = $this->getServer()->getPluginManager()->getPlugin("PureChat");
+                $this->getLogger()->info("PureChat support enabled!");
+            } else {
+                $this->getLogger()->warning("PureChat not found.");
+            }
+        }
     }
 }

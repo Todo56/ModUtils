@@ -1,4 +1,19 @@
 database_source: YAML # Either YAML or MySQL (wip)
 muted_messate: "You have been muted."
+purechat-support: true
 staffchat:
   prefix: .
+  join-message: "§8[§e§lStaffChat§r§8]§f: §6{player} §fjoined!"
+  leave-message: "§8[§e§lStaffChat§r§8]§f: {player} left!"
+  message-format: "§8[§e§lStaffChat§r§8]§f §6{player}§f: {msg}"
+commands:
+  mute:
+    mute-success: "{player} has been muted successfully!"
+    broadcast: true
+    broadcast-message: "§f§lMute:\n§r§3User: {player}\n§4Mod: {mod}\n§9Reason: {reason}"
+    broadcast-message-nr: "§f§lMute:\n§r§3User: {player}\n§4Mod: {mod}"
+    staff-chat: true
+    staff-chat-message: "§8[§e§lStaffChat§r§8]§r§5 {mod} has muted {player} for {reason}."
+    staff-chat-message-nr: "§8[§e§lStaffChat§r§8]§r§5 {mod} has muted {player}."
+    mute-message: "You are muted!"
+    muted-message: "{mod} has muted you for {reason}."
